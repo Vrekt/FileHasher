@@ -11,15 +11,14 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Welcome to FileHasher. Please select an option below.");
 
-		System.out.println("[1] SHA1");
-		System.out.println("[2] MD5");
+		System.out.println("SHA1");
+		System.out.println("MD5");
+		System.out.println("SHA256");
 
 		Scanner input = new Scanner(System.in);
 		String action = input.nextLine();
 
-		switch (action.toLowerCase()) {
-		case "sha1":
-		case "1":
+		if (action.equalsIgnoreCase("sha1")) {
 			System.out.println("Enter the path to the file.");
 			String path = input.nextLine();
 			input.close();
@@ -31,22 +30,44 @@ public class Main {
 			}
 
 			new Converter(file, Hash.SHA1);
-		case "md5":
-		case "2":
+			return;
+		}
+
+		if (action.equalsIgnoreCase("md5")) {
+
 			System.out.println("Enter the path to the file.");
-			String p = input.nextLine();
+			String path = input.nextLine();
 			input.close();
 
-			File f = new File(p);
-			if (!f.exists()) {
+			File file = new File(path);
+			if (!file.exists()) {
 				System.out.println("File not found.");
 				return;
 			}
 
-			new Converter(f, Hash.MD5);
+			new Converter(file, Hash.MD5);
+			return;
+		}
+
+		if (action.equalsIgnoreCase("sha256")) {
+
+			System.out.println("Enter the path to the file.");
+			String path = input.nextLine();
+			input.close();
+
+			File file = new File(path);
+			if (!file.exists()) {
+				System.out.println("File not found.");
+				return;
+			}
+
+			new Converter(file, Hash.SHA256);
+			return;
 
 		}
 
+		System.out.println("Invalid option.");
+		input.close();
 	}
 
 }

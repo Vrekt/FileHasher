@@ -70,6 +70,8 @@ public class Converter implements Runnable {
 				writer.write(HashHelper.sha1(line) + "\n");
 			case MD5:
 				writer.write(HashHelper.md5(line) + "\n");
+			case SHA256:
+				writer.write(HashHelper.sha256(line) + "\n");
 			default:
 				break;
 			}
